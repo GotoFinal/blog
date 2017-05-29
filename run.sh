@@ -16,7 +16,7 @@ do
 	echo $gitout
     if ! [[ $gitout == *"Already up-to-date"* ]]; then
         echo "Found update!"
-        jekyllserver b
+        jekyll b
         tmux send-keys -t jekyllserver 'jekyll s' C-r
         tmux send-keys -t jekyllserver 'jekyll s' C-m
     fi
