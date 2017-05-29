@@ -1,0 +1,29 @@
+[
+  {
+    "text": "Home",
+    "url": "/",
+    "icon": "fa-home",
+    "layout": "post"
+  },
+  {
+    "text": "About",
+    "url": "/about/",
+    "icon": "fa-comments"
+  },
+  {
+    "text": "Github",
+    "url": "https://github.com/GotoFinal/",
+    "icon": "fa-github"
+  },
+  {
+    "text": "Diorite",
+    "url": "https://diorite.org",
+    "icon": "fa-github"
+  },
+  {
+    "text": "XML Feed",
+    "url": "/feed.xml",
+    "icon": "fa-feed",
+    "target": _blank
+  }
+]

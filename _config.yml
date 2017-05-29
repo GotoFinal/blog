@@ -1,0 +1,28 @@
+title: GotoFinal
+description: Java (mostly), my projects and diorite.
+author: Bartłomiej Mazur
+logo: /static/img/avatar.jpg
+github: https://github.com/GotoFinal
+about: About Java, my projects and diorite.
+
+baseurl: ""
+url: "https://blog.gotofinal.com"
+
+allowsearch: true
+
+# disqus_shortname: aboutashu
+# google_analytics: UA-72862926-1
+
+share:
+  twitter_username: \#
+  fb_appid: 000000000000
+
+
+enableTags: true
+tagarray: []
+
+paginate: 20
+per_page: 20
+paginate_path: "/page:num/"
+markdown: kramdown
+gems: [jekyll-paginate, jekyll-gist]
