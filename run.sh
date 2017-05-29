@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+tmux kill-session -t jekyll
+jekyll b
+tmux new-session -d -s jekyll
+tmux send-keys -t jekyll 'jekyll s' C-m
+
 while [ "true" ]
 do
     gitout=$(git pull)
