@@ -10,6 +10,8 @@ echo "Create new session"
 tmux new-session -d -s jekyllserver
 echo "Start jekyll"
 tmux send-keys -t jekyllserver 'jekyll s' C-m
+jekyll clean
+jekyll b
 echo "Start update loop"
 while [ "true" ]
 do
@@ -19,8 +21,6 @@ do
         echo "Found update!"
         jekyll clean
         jekyll b
-        tmux send-keys -t jekyllserver C-c
-        tmux send-keys -t jekyllserver 'jekyll s' C-m
     fi
     sleep 60
 done
