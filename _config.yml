@@ -10,7 +10,7 @@ url: "https://blog.gotofinal.com"
 
 allowsearch: true
 
-# disqus_shortname: aboutashu
+disqus_shortname: gotofinal
 google_analytics: UA-100470162-1
 
 share:
