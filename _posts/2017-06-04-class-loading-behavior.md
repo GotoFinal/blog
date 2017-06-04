@@ -53,7 +53,7 @@ Let's start with aload:
 ![aload](/assets/class-loading-behavior-1.png)  
 And nothing, `aload` does not care about type, it just push element to stack. So let's check areturn:
 ![areturn](/assets/class-loading-behavior-2.png)  
-And we can see it perform multiple checks that involve return type, as it must check if value we want to return is compatible with return type of the method, and that cause JVM to load return type class, but there isn't such class so we have our `java.lang.NoClassDefFoundError: UnknownType` error.  
+And we can see that it perform multiple checks that involve return type, as it must check if value we want to return is compatible with return type of the method, and that cause JVM to load return type class, but there isn't such class so we have our `java.lang.NoClassDefFoundError: UnknownType` error.  
 So... that would be everything I wanted to show you today, I hope you find this interesting (and you were able to understand my english and bytecode (✌ ﾟ ∀ ﾟ)☞). 
 
 
