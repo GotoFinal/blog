@@ -86,7 +86,7 @@ static void makeAccessible(Field field) throws Exception {
     modifiersField.setInt(field, field.getModifiers() & ~ Modifier.FINAL);
 }
 ```
-Yey, more reflections on reflections! So now we can just simple create own fixed array of values: 
+Yey, more reflections on reflections! So now we just need to create own fixed array of values: 
 ```java
 Field $VALUESField = Monster.class.getDeclaredField("$VALUES");
 makeAccessible($VALUESField);
