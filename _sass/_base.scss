@@ -37,8 +37,9 @@ ul, ol, dl, figure,
     margin-bottom: $spacing-unit / 2;
 }
 
-
-
+.author-header {
+  margin-top: 10px;
+}
 /**
  * Images
  */
@@ -203,8 +204,4 @@ pre {
             fill: $grey-color;
         }
     }
-}
-
-.author-header {
-    margin-top: 10px;
 }
