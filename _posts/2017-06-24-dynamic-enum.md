@@ -6,11 +6,11 @@ categories:  [java, diorite]
 ---
 
 In java we have `enum` types, they might be great to describe some constant stuff, like days of week.  
-But unfortunately some people use them to describe something that might change, like types of users, types of monsters in some game, etc. And this is just wrong, enums should be constant, never change, never break.  
+But unfortunately some people use them to describe something that might change, like types of users, types of monsters in some game, etc. And this is just wrong, enums should be constant, they should never change or break.  
 Now let's imagine that we want to create some game with support for modding, and we used enum for that monster thing... and now it is impossible to add new monster type from mod level. (or isn't?)
 
 
-So I will show 2 things in this post, how to add new entry to already existing enum, and how we can replace enums with something different in our code.
+So I will show you two things in this post: how to add new constant to already existing enum, and how we can replace enums with something different in our code.
 
 # Hacking into enums
 REMEMBER: this is dirty hack, you should never use it, unless there is no other option.   
@@ -35,9 +35,9 @@ public enum Monster {
 }
 ```
 (I don't format code like that normally, just for blog)  
-Using any normal reflections to create new instance of enum will just fail, but there are 2 ways to do it: 
+Using normal reflections to create new enum instance will just fail, but there are two other ways to do it: 
 ### Reflections  
-Why does normal reflection fail to create our enum instance? We can just go to constructor source code and see what is going here
+But first... Why does normal reflection fail to create our enum instance? We can just go to source of `Constructor` and see what is going here
 ```java
 public T newInstance(Object ... initargs) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
 {
