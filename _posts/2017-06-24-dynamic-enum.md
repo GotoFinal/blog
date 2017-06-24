@@ -138,7 +138,7 @@ Field entityIdField = Monster.class.getDeclaredField("entityId");
 makeAccessible(entityIdField);
 entityIdField.set(enumValue, "Lion");
 ```
-And then again, you need to add that value to all that arrays and maps (using this same code as for previous way).  
+And then again, you need to add that value to all that arrays and maps (using this same code as for previous method).  
 ___  
 Whole code: [**Gist: EnumHack.java**](https://gist.github.com/GotoFinal/74393bbc88d2b89646c93a9617e04795)
 
