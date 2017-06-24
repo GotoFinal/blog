@@ -119,8 +119,8 @@ public static void unsafeWay() throws Throwable {
     Monster enumValue = (Monster) unsafe.allocateInstance(Monster.class);
 }
 ```
-Looks simpler? But notice that we didn't even pass anything to constructor of monster, this is how `Unsafe` works, it does NOT call the constructor, it just allocate new object, and this is ver unsafe, as any action on object might now throw unexpected errors, we need to manually simulate constructor!  
-So you just need to manually get all fields and set their values.  
+Looks simpler? But notice that we didn't even pass anything to constructor of monster, this is how `Unsafe` works, it does NOT call the constructor, it just allocate new object, and this is very unsafe, as any action on that object might now throw unexpected errors, we need to manually simulate constructor!  
+So we just need to manually get all fields and set their values to something that make sense.  
 ```java
 Field ordinalField = Enum.class.getDeclaredField("ordinal");
 makeAccessible(ordinalField);
