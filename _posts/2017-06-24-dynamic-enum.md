@@ -71,7 +71,7 @@ public static void reflectionWay() throws Throwable {
         acquireConstructorAccessorMethod.setAccessible(true);
         ca = (ConstructorAccessor) acquireConstructorAccessorMethod.invoke(constructor);
     }
-    // note that real constructor contains 2 additional parameters, name and oridinal
+    // note that real constructor contains 2 additional parameters, name and ordinal
     Monster enumValue = (Monster) ca.newInstance(new Object[]{"CAERBANNOG_RABBIT", 4, CaerbannogRabbit.class, "caerbannograbbit"});// you can call that using reflections too, reflecting reflections are best part of java ;)
 }
 ```
