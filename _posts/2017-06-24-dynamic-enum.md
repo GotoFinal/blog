@@ -139,7 +139,7 @@ makeAccessible(entityIdField);
 entityIdField.set(enumValue, "Lion");
 ```
 And then again, you need to add that value to all that arrays and maps (using this same code as for previous method).  
-___  
+______  
 Whole code: [**Gist: EnumHack.java**](https://gist.github.com/GotoFinal/74393bbc88d2b89646c93a9617e04795)
 
 # Own enum
@@ -178,7 +178,7 @@ How it works? A bit tricky, but not that *hacky* as previous reflections: [**Git
 You can also find it in diorite repository in a bit cleaner form (LazyValue is used, and reflections are handled by special library).  
 
 It is possible to implement that for java 8, but then you need to use internal API `Reflections.getCallerClass()` to track where method was invoked.
-____
+______  
 
 
 Also... I need some ideas for new posts! :D
