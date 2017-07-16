@@ -188,3 +188,8 @@ In next posts I will write about performance and costs of:
 - Write to me/in comments if you want to see benchmark of something else!
 
 (Not necessary in this order)  
+
+# Final note
+(added after publishing of part 2)  
+Benchmarks are created using JMH benchmark framework.  
+All code used for benchmarks can be found on GitHub: [**[Blog benchmarks]**](https://github.com/GotoFinal/blog-benchmarks)
