@@ -79,37 +79,37 @@ There is one problem with this test, JIT might inline that code completely remov
 All benchmarks were run with the C2 JIT.
 ```java
 Runnable CACHED_ANONYMOUS = new Runnable() {
-    @Override public void run() {
+    public void run() {
         Blackhole.consumeCPU(1);
     }
 };
 Runnable CACHED_LAMBDA = () -> Blackhole.consumeCPU(1);
 
-@Benchmark public void normalClass(Blackhole blackhole) { someTaskConsumer(blackhole, new NormalClass()); }
-@Benchmark public void normalClassCached(Blackhole blackhole) { someTaskConsumer(blackhole, NormalClass.CACHED); }
-@Benchmark public void nestedClass(Blackhole blackhole) { someTaskConsumer(blackhole, new NestedClass()); }
-@Benchmark public void nestedClassCached(Blackhole blackhole) { someTaskConsumer(blackhole, NESTED_CACHED); }
-@Benchmark public void anonymousWithoutData(Blackhole blackhole) {
+void normalClass(Blackhole blackhole) { someTaskConsumer(blackhole, new NormalClass()); }
+void normalClassCached(Blackhole blackhole) { someTaskConsumer(blackhole, NormalClass.CACHED); }
+void nestedClass(Blackhole blackhole) { someTaskConsumer(blackhole, new NestedClass()); }
+void nestedClassCached(Blackhole blackhole) { someTaskConsumer(blackhole, NESTED_CACHED); }
+void anonymousWithoutData(Blackhole blackhole) {
     someTaskConsumer(blackhole, new Runnable() {
-        @Override public void run() {
+        public void run() {
             Blackhole.consumeCPU(1);
         }}); }
-@Benchmark public void anonymousWithData(Blackhole blackhole) {
+void anonymousWithData(Blackhole blackhole) {
     someTaskConsumer(blackhole, new Runnable() {
-        @Override public void run() {
+        public void run() {
             Blackhole.consumeCPU(1);
             blackhole.consume(blackhole);
         }}); }
-@Benchmark public void anonymousCached(Blackhole blackhole) { someTaskConsumer(blackhole, CACHED_ANONYMOUS); }
-@Benchmark public void lambdaWithoutData(Blackhole blackhole) { someTaskConsumer(blackhole, () -> Blackhole.consumeCPU(1)); }
-@Benchmark public void lambdaWithData(Blackhole blackhole) { 
+void anonymousCached(Blackhole blackhole) { someTaskConsumer(blackhole, CACHED_ANONYMOUS); }
+void lambdaWithoutData(Blackhole blackhole) { someTaskConsumer(blackhole, () -> Blackhole.consumeCPU(1)); }
+void lambdaWithData(Blackhole blackhole) { 
     someTaskConsumer(blackhole, () -> {
         Blackhole.consumeCPU(1);
         blackhole.consume(blackhole);
     }); }
-@Benchmark public void lambdaCached(Blackhole blackhole) { someTaskConsumer(blackhole, CACHED_LAMBDA); }
+void lambdaCached(Blackhole blackhole) { someTaskConsumer(blackhole, CACHED_LAMBDA); }
 
-public void someTaskConsumer(Blackhole blackhole, Runnable runnable) {
+void someTaskConsumer(Blackhole blackhole, Runnable runnable) {
     Blackhole.consumeCPU(1);
     runnable.run();
     blackhole.consume(runnable);  // to prevent additional optimizations
@@ -117,9 +117,11 @@ public void someTaskConsumer(Blackhole blackhole, Runnable runnable) {
 }
 static class NormalClass implements Runnable {
     static NormalClass CACHED = new NormalClass();
-    @Override public void run() { Blackhole.consumeCPU(1); }}
+    public void run() { Blackhole.consumeCPU(1); }}
 NestedClass NESTED_CACHED = new NestedClass();
-class NestedClass implements Runnable { @Override public void run() { Blackhole.consumeCPU(1); }}
+class NestedClass implements Runnable { 
+    public void run() { Blackhole.consumeCPU(1); 
+}}
 ```
 (You can find this code in more readable from on my github)
 
@@ -147,9 +149,9 @@ In most cases that performance isn't needed, but lets check it anyway, as some o
 Lets start with something very simple, just sum of random numbers in array:
 ```java
     int[] random_1_000_000 = new Random(123).ints(1_000_000).toArray();
-    @Benchmark public long intSumStream() { return IntStream.of(random_1_000_000).sum(); }
-    @Benchmark public long intSumStreamParallel() { return IntStream.of(random_1_000_000).parallel().sum(); }
-    @Benchmark public long intSumOldJava() {
+    long intSumStream() { return IntStream.of(random_1_000_000).sum(); }
+    long intSumStreamParallel() { return IntStream.of(random_1_000_000).parallel().sum(); }
+    long intSumOldJava() {
         long sum = 0;
         for (int i : random_1_000_000) { sum += i; }
         return sum;
@@ -255,15 +257,17 @@ Huge and nasty but probably faster (but can be implemented in more readable form
 @Benchmark
 public void advancedOperationsStream(Blackhole blackhole) {
     Collection<Person> people = workerMap.values().stream()
-                                    .filter(person -> ((person.name.equals("Kate") || person.name.equals("Anna")) && (person.age <= 15)))
-                                    .sorted(Comparator.comparingInt((Person p) -> p.age).thenComparing(p -> p.name).thenComparing(p -> p.uuid))
-                                    .collect(Collectors.toList());
+        .filter(person -> ((person.name.equals("Kate") || person.name.equals("Anna")) && (person.age <= 15)))
+        .sorted(Comparator.comparingInt((Person p) -> p.age).thenComparing(p -> p.name).thenComparing(p -> p.uuid))
+        .collect(Collectors.toList());
     blackhole.consume(people);
     if (people.size() != 83541) {
         throw new AssertionError();
     }
     // NOTE: .flatMap(p -> p.accounts.stream().filter(a -> a.money <= 0)) will be SLOWER
-    List<Account> accounts = people.stream().flatMap(p -> p.accounts.stream()).filter(a -> a.money <= 0).collect(Collectors.toList());
+    List<Account> accounts = people.stream()
+        .flatMap(p -> p.accounts.stream()).filter(a -> a.money <= 0)
+        .collect(Collectors.toList());
     if (accounts.size() != 25117) {
         throw new AssertionError();
     }
