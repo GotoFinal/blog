@@ -19,7 +19,7 @@ So instead of testing what I wanted, I will do what you want instead, especially
 Someone asked if a for loop can be faster by using a try/catch (for the `IndexOfBoundException`) instead of index checking, throwing an exception can be slow (as a stacktrace must be created), but there is only one exception thrown instead of thousands range checks.  
 But to throw an exception java itself also need to check that index, and JIT should do the magic to not check it when we are already doing so, but does it?  
 
-Also... everyone should first think what you will be doing in a loop, an in most cases you really don't need to care about this, as operations inside the loop will consume most of the time and time needed to just roll the loop is invisible at such scale!
+Also... everyone should first think what you will be doing in a loop, as in most cases you really don't need to care about this, as operations inside the loop will consume most of the time and time needed to just roll the loop is invisible at such scale!
 
 This seems to be a pretty complicated topic, so creating one simple test would be just a stupid idea, so I will test multiple different cases:
 * for-each loop on the array of 10/1000/10_000_000 elements.
