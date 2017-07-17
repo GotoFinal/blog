@@ -40,7 +40,7 @@ And what is even more important, even simple operation in loop make all that pro
 
 But if you do such small operations that you think you will be able to see difference, then results are pretty interesting... as they are different for C1 and C2 JIT settings.  
 
-For the C1 we can see that overhead of an exception is especially visible for small loops, but what is weird, that even larger loops are still much slower if they use try/catch instead of simple indexed loop, much more than time needed to throw that single exception, how it is possible?  
+For the C1 we can see that overhead of an exception is especially visible for small loops, but what is weird, that even larger loops are still much slower if they use try/catch instead of simple indexed loop, much more than time needed to throw that single exception, how is it possible?  
 Everything changes for loops that change indexes while iterating, as then for larger loops we can see very small benefit for try/catch method.  
 
 For the C2 something interesting happens, all overhead of an exception just disappear, there is just no difference between both methods, all results are just this same.  
