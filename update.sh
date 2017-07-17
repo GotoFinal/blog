@@ -10,17 +10,10 @@ echo "Create new session"
 tmux new-session -d -s jekyllserver
 echo "Start jekyll"
 tmux send-keys -t jekyllserver 'jekyll s' C-m
+gitout=$(git pull)
+echo $gitout
+if ! [[ $gitout == *"Already up-to-date"* ]]; then
+    echo "Found update!"
+fi
 jekyll clean
 jekyll b
-echo "Start update loop"
-while [ "true" ]
-do
-    gitout=$(git pull)
-	echo $gitout
-    if ! [[ $gitout == *"Already up-to-date"* ]]; then
-        echo "Found update!"
-        jekyll clean
-        jekyll b
-    fi
-    sleep 60
-done

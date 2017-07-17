@@ -36,3 +36,4 @@ exclude:
 - vendor/gems/
 - vendor/ruby/
 - run.sh
+- update.sh
