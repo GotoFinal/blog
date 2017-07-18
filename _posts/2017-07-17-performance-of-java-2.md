@@ -185,7 +185,7 @@ Then we need to find all bank accounts of that people from previous collection b
 static final int SIZE = 1_000_000;
 Random random = new Random(123);
 Map<UUID, Person> workerMap = Stream.generate(() -> new Person(random)).limit(SIZE).collect(Collectors.toMap(p -> p.uuid, p -> p));
-static String[] names = {"Steve", "Kate", "Anna", "Brajanek", "( ͡º ͜ʖ͡º)", "Faggot"};
+static String[] names = {"Steve", "Kate", "Anna", "Brajanek", "( ͡º ͜ʖ͡º)", "Somebody"};
 static class Person {
     final UUID uuid = UUID.randomUUID();
     final String name;
