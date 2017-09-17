@@ -8,6 +8,7 @@ categories: [java, benchmark, performance]
 Sorry for no updates for such long time, but I just had a lot of other problems. Posts should be now more often, but probably shorter.
 
 Previous posts:  
+[***1.* Introduction, primitives, random and modulo**](https://blog.gotofinal.com/java/benchmark/performance/2017/07/09/performance-of-java-1.html)  
 [***2.* For loops, lambdas, streams**](https://blog.gotofinal.com/java/benchmark/performance/2017/07/17/performance-of-java-2.html)
 
 In this post we will only focus on reflections, and some two interesting cases when using MethodHandles, we will test reflective access to both private and public fields, and how reflections/method handles performance can be affected if field that store MethodHandle/Field is static and/or final.  
