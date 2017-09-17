@@ -18,17 +18,17 @@ Raw results can be found in link above too, here I will only point most interest
 
 Lets start with comparing normal reflections:
 ```
-Benchmark                                                                           Mode  Cnt  Score   Error  Units
-ReflectionBenchmark.normalDirectAccess                                              avgt   10  2,867 ± 0,142  ns/op
+Benchmark                                                Mode  Cnt  Score   Error  Units
+normalDirectAccess                                       avgt   10  2,867 ± 0,142  ns/op
 
-ReflectionBenchmark.somethingPublicFieldAccessor_nonAccessible_access               avgt   10  6,622 ± 0,422  ns/op
-ReflectionBenchmark.somethingPublicFieldAccessor_nonAccessible_static_access        avgt   10  5,790 ± 0,177  ns/op
-ReflectionBenchmark.somethingPublicFieldAccessor_access                             avgt   10  6,106 ± 1,180  ns/op
-ReflectionBenchmark.somethingPublicFieldAccessor_static_access                      avgt   10  4,840 ± 0,261  ns/op
+somethingPublicFieldAccessor_nonAccessible_access        avgt   10  6,622 ± 0,422  ns/op
+somethingPublicFieldAccessor_nonAccessible_static_access avgt   10  5,790 ± 0,177  ns/op
+somethingPublicFieldAccessor_access                      avgt   10  6,106 ± 1,180  ns/op
+somethingPublicFieldAccessor_static_access               avgt   10  4,840 ± 0,261  ns/op
 
-ReflectionBenchmark.somethingPrivateFieldAccessor_access                            avgt   10  5,397 ± 0,125  ns/op
-ReflectionBenchmark.somethingPrivateFieldAccessor_static_access                     avgt   10  4,758 ± 0,122  ns/op
-ReflectionBenchmark.somethingPrivateFieldAccessor_static_final_access               avgt   10  4,739 ± 0,120  ns/op
+somethingPrivateFieldAccessor_access                     avgt   10  5,397 ± 0,125  ns/op
+somethingPrivateFieldAccessor_static_access              avgt   10  4,758 ± 0,122  ns/op
+somethingPrivateFieldAccessor_static_final_access        avgt   10  4,739 ± 0,120  ns/op
 ```
 From that we can see that static or final does not change much, the only difference between static and non-static is less time needed to fetch `Field` instance.  
 But we can see that `.setAccessible` gives small performance boost even when you don't need to use it.  
@@ -39,21 +39,21 @@ As public and private results are this same in all cases I wll now focus on priv
 
 Now something more interesting, method handles:
 ```
-Benchmark                                                                           Mode  Cnt  Score   Error  Units
-ReflectionBenchmark.somethingPrivateFieldAccessor_handle_access                     avgt   10  5,831 ± 0,204  ns/op
-ReflectionBenchmark.somethingPrivateFieldAccessor_handle_bound_access               avgt   10  5,498 ± 0,175  ns/op
+Benchmark                                                Mode  Cnt  Score   Error  Units
+somethingPrivateFieldAccessor_handle_access              avgt   10  5,831 ± 0,204  ns/op
+somethingPrivateFieldAccessor_handle_bound_access        avgt   10  5,498 ± 0,175  ns/op
 
-ReflectionBenchmark.somethingPrivateFieldAccessor_static_handle_access              avgt   10  5,408 ± 0,202  ns/op
-ReflectionBenchmark.somethingPrivateFieldAccessor_static_handle_bound_access        avgt   10  5,327 ± 0,265  ns/op
+somethingPrivateFieldAccessor_static_handle_access       avgt   10  5,408 ± 0,202  ns/op
+somethingPrivateFieldAccessor_static_handle_bound_access avgt   10  5,327 ± 0,265  ns/op
 ```
 using `.bind` can also improve performance, and again, nothing special.
 
 But... if we use `static final MethodHandle = ...` in our code something interesting happens:
 ```
-Benchmark                                                                           Mode  Cnt  Score   Error  Units
-ReflectionBenchmark.normalDirectAccess                                              avgt   10  2,867 ± 0,142  ns/op
-ReflectionBenchmark.somethingPrivateFieldAccessor_static_final_handle_access        avgt   10  2,827 ± 0,058  ns/op
-ReflectionBenchmark.somethingPrivateFieldAccessor_static_final_handle_bound_access  avgt   10  2,859 ± 0,084  ns/op
+Benchmark                                                      Mode  Cnt  Score   Error  Units
+normalDirectAccess                                             avgt   10  2,867 ± 0,142  ns/op
+somethingPrivateFieldAccessor_static_final_handle_access       avgt   10  2,827 ± 0,058  ns/op
+somethingPrivateFieldAccessor_static_final_handle_bound_access avgt   10  2,859 ± 0,084  ns/op
 ```
 JIT can optimize such MethodHandles much better than all other reflection, allowing to get this same performance as direct access, even on final fields!  
 It's great and sad at this same time, as we can use reflections without any overhead, but only if we can construct MethodHandles in static blocks while loading class.  
