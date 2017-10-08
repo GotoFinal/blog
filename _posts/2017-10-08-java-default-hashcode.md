@@ -5,16 +5,16 @@ date:   2017-10-08 22:00
 categories: [java]
 ---
 
-I see a lot of people asking in many places how default hashcode works?
+I see a lot of people asking in many places how default hashcode is implemented?
 
-And in many of that places someone did answer that this generated from memory address of given object, but this is kind of invalid, so I 
-wanted to write something about it.  
+And in many places I found answer that it is generated from memory address of given object, but this is kind of invalid, so I 
+decided to write something about it.  
 
 First, we should know how java handles default hashcode, if object does not override hashcode method java on first call to hashcode will 
 generate special hashcode. (you can get it via `System.identityHashCode` too)  
-But there is something interesting, java does not store that hashcode in some normal variable, or does not recalculate it on each usage 
-but it does store it directly in object header.  
-In source code of JVM we can find this nice comment:
+But there is something interesting about that, java does not store that hashcode in some normal variable, or does not recalculate it on each usage 
+but instead java stores identity hashcode directly in object header!  
+In source code of JVM we can find this nice comment about object header structure:
 ```
 // The markOop describes the header of an object.
 //
@@ -42,14 +42,14 @@ In source code of JVM we can find this nice comment:
 //  narrowOop:32 unused:24 cms_free:1 unused:4 promo_bits:3 ----->| (COOPs && CMS promoted object)
 //  unused:21 size:35 -->| cms_free:1 unused:7 ------------------>| (COOPs && CMS free block)
 ```
-We can see that there is few bits for hash, but this same bits are used by biased locks! 
-What is biased locking? 
+We can see that there are few bits for hash, but this same bits are used for biased locking!  
+But what is biased locking you may ask?  
 ```
 Enables a technique for improving the performance of uncontended synchronization. An object is "biased" toward the thread which first acquires its monitor via a monitorenter bytecode or synchronized method invocation; subsequent monitor-related operations performed by that thread are relatively much faster on multiprocessor machines.
 ```
-So it is just nice optimization made by JVM if mostly only one thread is synchronizing on given object, as JVM can skip many additional 
+So it is just a nice optimization made by the JVM if mostly only one thread is synchronizing on given object, as then JVM can skip many additional 
 checks and reduce amount of overhead for simple cases.  
-So if we use identity/default hashcode then we will lose that feature for given object, this is something worth to remember!  
+So if we use the identity/default hashcode then we will lose that feature for given object, this is something worth to remember!  
 
 But now, what is that hashcode? After some digging I found that we can actually control what it is, let's try run this simple code:
 ```java
@@ -102,7 +102,7 @@ static inline intptr_t get_next_hash(Thread * Self, oop obj) {
   return value;
 }
 ```
-So, we have simple global Park-Miller RNG, some random value based on object address, always `1`, simple counter, just 32 bit pointer address, and currently used "Marsaglia's xor-shift scheme with thread-specific state".  
+So, we have a simple global Park-Miller RNG, some random value based on object address, always `1`, simple counter, just 32 bit pointer address, and currently used "Marsaglia's xor-shift scheme with thread-specific state".  
 What can be also interesting, identity hash code can never be 0, if it will somehow generate 0, it will be changed to `0xBAD` value.  
 
 And that would be all for this simple post, next time when you will be reading/talking about internal hashcode generation, as we all do this after work (oh, you don't? that's weird!), you will know how it works and that you should not synchronize on objects that don't override hashcode or are stored as keys in identity hash map!
