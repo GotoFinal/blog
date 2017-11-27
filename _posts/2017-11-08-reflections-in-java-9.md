@@ -5,7 +5,7 @@ date:   2017-11-08 13:00
 categories: [java]
 ---
 
-In Java 9 we have a new module system, I will not write much about it, as there is already 10000000 better blog posts about it,
+In Java 9 we have a new module system, I will not write much about it, as there are already 10000000 better blog posts about it,
 but with addition of modules oracle decided to give much more control over reflections to the module creators, 
 now people can just block reflections to/for/from given module, and even the `setAccessible(true)` method will not help you to get here.  
 By default in Java 9 there is a flag that still allows for illegal access, but it will change in next release, so here we will simulate that next release with a `--illegal-access=deny` flag.  
