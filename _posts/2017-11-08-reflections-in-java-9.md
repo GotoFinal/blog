@@ -49,7 +49,9 @@ Exception in thread "main" java.lang.reflect.InaccessibleObjectException: Unable
 We can just add a flag as given, but what if we want to be sure that our library will work without any changes to starting script etc?  
 **(ofc you should try first to remove any needed reflections like this, and use this only when really needed, don't use it just because it is possible!)**  
 
-There is at least few possible ways to do this, first one is to use good old Unsafe class, but how? In my opinion the best way to do this is to invoke special native setAccessible method - as then we can use it to make any field/method/constructor accessible, and we only need to use unsafe once - but you can also edit modifiers of each field/method you want to access.  
+There is at least few possible ways to do this, first one is to use good old Unsafe class, but how? 
+In my opinion the best way to do this is to invoke special native setAccessible method - as then we can use it to make any field/method/constructor accessible, and we only need to use unsafe once - but you can also edit modifiers of each field/method you want to access.  
+Java source code for `AccessibleObject.setAccessible` method:  
 ```java
 public void setAccessible(boolean flag) {
     AccessibleObject.checkPermission();
