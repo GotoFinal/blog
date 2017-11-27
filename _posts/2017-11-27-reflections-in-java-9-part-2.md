@@ -127,6 +127,10 @@ And now we can run our normal code, with normal `setAccessible(true)` call, but 
 All wee need to do is add our agent using `-javaagent:"path_to_our_agent.jar"` jvm argument.  
 Then our `premain` method will be called before `main` method, and make our ArrayList accessible to our module via reflections.  
 
+You can find all used code here:  
+[**blog-benchmarks/com/gotofinal/blog/tricks**](https://github.com/GotoFinal/blog-benchmarks/tree/master/basic/src/main/java/com/gotofinal/blog/tricks)  
+[**blog-benchmarks/cppcode**](https://github.com/GotoFinal/blog-benchmarks/tree/master/basic/src/main/resources/cppcode)  
+
 
 NOTE: everything shoved here should not be used in production code without some important reason, as in most cases it can be done it much better way!
 
