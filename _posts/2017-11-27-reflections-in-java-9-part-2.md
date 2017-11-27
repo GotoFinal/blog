@@ -97,7 +97,7 @@ But probably not everyone here know what instrumentation is, so some short descr
 Instrumentation API allows to redefine java classes and more by special agent libraries, it is often used by code profilers, or some advanced libraries that modify our code to provide some features. (note that often proxy classes can be used instead)  
 
 So we need to create our agent library, it will be very simple:
-```
+```java
 package com.gotofinal.blog.tricks;
 
 import java.lang.instrument.Instrumentation;
