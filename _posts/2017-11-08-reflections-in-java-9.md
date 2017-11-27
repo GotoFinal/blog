@@ -108,3 +108,5 @@ But I still don't like oracle for making life harder for some of us, some projec
 > In October 2015, Byte Buddy was distinguished with a Duke's Choice award by Oracle. The award appreciates Byte Buddy for its "tremendous amount of innovation in Java Technology".   
 
 And now they are making developing and supporting such libraries harder.
+
+Part 2: [**Reflections in java 9, part 2**](https://blog.gotofinal.com/java/2017/11/27/reflections-in-java-9-part-2.html)  
