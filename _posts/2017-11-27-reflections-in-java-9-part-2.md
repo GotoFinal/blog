@@ -65,7 +65,7 @@ And now we just need to call this method:
 ```cpp
 env->CallBooleanMethod(accessibleObject, cachedMethod, value);
 ```
-And this is whole code, we like I said before, it is good idea to cache such code, so at the end we will be using this code:
+And this is whole code, but like I said before, it is good idea to cache such code, so at the end our code should look more like this:
 ```cpp
 #include "com_gotofinal_blog_tricks_ReflectiveAccessModulesNative.h"
 
