@@ -42,7 +42,7 @@ public class ReflectiveAccessModulesNative {
     private static native void setAccessible(AccessibleObject accessibleObject, boolean value);
 }
 ```
-So far it will not work yet, as we didn't prepare library jet, first we need to prepare header file using `javac -h` method.  
+So far it will not work yet, as we didn't prepare library yet, first we need to prepare header file using `javac -h` method.  
 Mine looks like that: [**com_gotofinal_blog_tricks_ReflectiveAccessModulesNative.h**](https://gist.github.com/GotoFinal/2cef981f42fc53c8581882e642a3d7e6)  
 
 And now implementation class: `com_gotofinal_blog_tricks_ReflectiveAccessModulesNative.cpp`:
