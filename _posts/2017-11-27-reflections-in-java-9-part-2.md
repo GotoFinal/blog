@@ -6,6 +6,7 @@ categories: [java]
 ---
 
 In last post we used unsafe to break module system, in this post I will show other ways for doing this: native code, and instrumentation.  
+Last post: [**Reflections in java 9**](https://blog.gotofinal.com/java/2017/11/08/reflections-in-java-9.html)  
 
 Native code can execute any method and access any field using JVM API without any access checks, but accessing java from native code is much slower, 
 so it is good idea to cache class and method pointers.  
