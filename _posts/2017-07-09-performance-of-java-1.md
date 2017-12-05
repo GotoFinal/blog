@@ -24,7 +24,7 @@ public BigDecimal objectPerformance() {
     }
     BigDecimal sum = new BigDecimal(0);
     for (Long aLong : longs) {
-        sum.add(new BigDecimal(aLong));
+        sum = sum.add(new BigDecimal(aLong));
     }
     return sum;
 }
@@ -38,22 +38,23 @@ public BigDecimal primitivesPerformance() {
     }
     BigDecimal sum = new BigDecimal(0);
     for (long aLong : longs) {
-        sum.add(new BigDecimal(aLong));
+        sum = sum.add(new BigDecimal(aLong));
     }
     return sum;
 }
 ```
 Notice that we are adding all numbers to `BigDecimal` so we are performing some additional operations and wrapping primitives to objects anyway, so it is still that big difference? yes, it is:  
 ```
-Benchmark                                 Mode  Cnt         Score          Error  Units
-PrimitiveVsObjects.objectPerformance      avgt    3  22633506,430 ± 11143332,215  ns/op
-PrimitiveVsObjects.primitivesPerformance  avgt    3   8299050,510 ±   920798,102  ns/op
+Benchmark                                       Mode  Cnt   Score   Error  Units
+PrimitiveVsObjects.objectPerformance            avgt   20  81.319 ± 6.135  ms/op
+PrimitiveVsObjects.primitivesPerformance        avgt   20   7.197 ± 0.089  ms/op
 ```
 If we will just sum that to `long` (and probably overflow long multiple times) we will get:
 ```
-Benchmark                                     Mode  Cnt         Score         Error  Units
-PrimitiveVsObjects.objectPerformanceLong      avgt    3  15514831,702 ± 5574084,401  ns/op
-PrimitiveVsObjects.primitivesPerformanceLong  avgt    3   2622083,810 ±  131892,454  ns/op
+
+Benchmark                                       Mode  Cnt   Score   Error  Units
+PrimitiveVsObjects.objectPerformanceLong        avgt   20  40.422 ± 2.711  ms/op
+PrimitiveVsObjects.primitivesPerformanceLong    avgt   20   2.609 ± 0.071  ms/op
 ```
 
 NOTE: when doing such simple additions, just should first think if you can sum them while reading instead of reading them all to array, it will save you a lot of memory.
