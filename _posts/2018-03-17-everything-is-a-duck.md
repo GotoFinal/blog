@@ -2,7 +2,7 @@
 layout: post
 title: "Everything is a duck, or not?"
 date:   2018-03-17 17:30
-image: assets/everything-is-a-duck-header.png
+image: assets/everything-is-a-duck-header-img.jpg
 categories: [java, breakingjava]
 ---
 
