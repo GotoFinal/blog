@@ -2,7 +2,7 @@
 layout: post
 title: Dynamic enums in java
 date:   2017-06-24 18:57
-categories:  [java, diorite]
+categories:  [java, diorite, breakingjava]
 ---
 
 In java we have `enum` types, they might be great to describe some constant stuff, like days of week.  

@@ -2,7 +2,7 @@
 layout: post
 title: Reflections over modules in java 9
 date:   2017-11-08 13:00
-categories: [java]
+categories: [java, breakingjava]
 ---
 
 In Java 9 we have a new module system, I will not write much about it, as there are already 10000000 better blog posts about it,

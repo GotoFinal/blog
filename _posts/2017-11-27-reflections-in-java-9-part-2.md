@@ -2,7 +2,7 @@
 layout: post
 title: Reflections over modules in java 9, part 2
 date:   2017-11-27 19:30
-categories: [java]
+categories: [java, breakingjava]
 ---
 
 In last post we used unsafe to break module system, in this post I will show other ways for doing this: native code, and instrumentation.  
