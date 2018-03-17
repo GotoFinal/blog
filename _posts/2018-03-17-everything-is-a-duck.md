@@ -1,9 +1,10 @@
 ---
 layout: post
-title: Everything is a duck, or not?
-date:   2018-03-17 19:30
+title: "Everything is a duck, or not?"
+date:   2018-03-17 17:30
 categories: [java, breakingjava]
 ---
+
 I didn't post anything in a while again... maybe this time it will be better.  
 This post will be short, and next one will be that promised instrumentation. (probably tomorrow)  
 
