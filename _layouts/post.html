@@ -50,7 +50,8 @@ layout: default
 <script>
     window.onload = function () {
         Commento.init({
-            serverUrl: "gotofinal.com:8672"
+            serverUrl: "gotofinal.com:8672",
+            serverUrlAssets: "{{ site.url }}/static/commento"
         });
     }
 </script>

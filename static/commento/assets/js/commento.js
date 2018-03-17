@@ -261,6 +261,7 @@
     var _showdownUrl = "/assets/vendor/showdown.min.js";
     var _commentoCssUrl = "/assets/style/commento.min.css";
     var _serverUrl = '';
+    var _serverUrlAssets = '';
     var _honeypot = false;
     var _api = {};
     var _showdownConverter;
@@ -556,9 +557,10 @@
 
     Commento.init = function(configuration) {
         _serverUrl = configuration.serverUrl || _serverUrl;
+        _serverUrlAssets = configuration.serverUrlAssets || _serverUrlAssets;
         _honeypot = configuration.honeypot || _honeypot;
-        _showdownUrl = configuration.showdownUrl || (_serverUrl + _showdownUrl);
-        _commentoCssUrl = configuration.commentoCssUrl || (_serverUrl + _commentoCssUrl);
+        _showdownUrl = configuration.showdownUrl || (_serverUrlAssets + _showdownUrl);
+        _commentoCssUrl = configuration.commentoCssUrl || (_serverUrlAssets + _commentoCssUrl);
 
         _api.get = _serverUrl + '/get';
         _api.create = _serverUrl + '/create';
