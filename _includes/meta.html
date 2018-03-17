@@ -34,11 +34,11 @@
           <meta content="{{ site.url }}/about/" property="article:author">
         {% endif %}
         {% if page.image %}
-          <meta content="{{ site.url }}/static/img/posts/{{ page.image }}" property="og:image">
+          <meta content="{{ site.url }}/{{ page.image }}" property="og:image">
           <meta property="og:image:type" content="image/jpeg">
         {% else %}
           {% if site.image %}
-            <meta content="{{ site.url }}/static/img/posts/{{ site.image }}" property="og:image">
+            <meta content="{{ site.url }}/{{ site.image }}" property="og:image">
             <meta property="og:image:type" content="image/jpeg">
           {% else %}
             <meta content="{{ site.url }}/static/img/logo-high-resolution.png" property="og:image">
@@ -58,10 +58,10 @@
         <meta name="twitter:site" content="@{{ site.share.twitter_username }}">
         <meta name="twitter:creator" content="@{{ site.share.twitter_username }}">
         {% if page.image %}
-          <meta name="twitter:image" content="{{ site.url }}/static/img/posts/{{ page.image }}">
+          <meta name="twitter:image" content="{{ site.url }}/{{ page.image }}">
         {% else %}
           {% if site.image %}
-            <meta name="twitter:image" content="{{ site.url }}/static/img/posts/{{ site.image }}">
+            <meta name="twitter:image" content="{{ site.url }}/{{ site.image }}">
           {% endif %}
         {% endif %}
         {% if page.title %}
